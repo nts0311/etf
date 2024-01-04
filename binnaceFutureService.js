@@ -40,7 +40,8 @@ function calculateTargetAndStopLossPricesForLong(
 
 async function openLongPosition(orderInfo) {
   try {
-    // Calculate the maximum quantity using leverage
+    console.log('placing long order:')
+    console.log(orderInfo)
 
     const {
       symbol,
@@ -61,7 +62,7 @@ async function openLongPosition(orderInfo) {
     // Calculate the order size in BTC
     const orderSizeBTC = maxQuantityUSDT / currentPrice
 
-    console.log(`rounded: ${orderSizeBTC}`)
+    console.log(`order size: ${orderSizeBTC}`)
 
     // Place a market order
     const order = await exchange.createMarketOrder(
@@ -74,7 +75,6 @@ async function openLongPosition(orderInfo) {
     )
 
     console.log('Long position opened successfully')
-    console.log(orderInfo)
 
     // Calculate target price for take profit and stop-loss price
     currentPrice = await getCurrentPrice(symbol)
@@ -137,6 +137,9 @@ function calculateTargetAndStopLossPricesForShort(
 
 async function openShortPosition(orderInfo) {
   try {
+    console.log('placing short order:')
+    console.log(orderInfo)
+
     const {
       symbol,
       leverage,
@@ -159,6 +162,8 @@ async function openShortPosition(orderInfo) {
     // Calculate the order size in BTC
     const orderSizeBTC = maxQuantityUSDT / currentPrice
 
+    console.log(`order size: ${orderSizeBTC}`)
+
     // Place a market order to open a short position
     const order = await exchange.createMarketOrder(
       symbol,
@@ -170,7 +175,6 @@ async function openShortPosition(orderInfo) {
     )
 
     console.log('Short position opened successfully')
-    console.log(orderInfo)
 
     // Calculate target price for take profit and stop-loss price
     currentPrice = await getCurrentPrice(symbol)
