@@ -15,6 +15,7 @@ function createBinanceExchange() {
   exchange = new ccxt.binance(options)
 
   if (process.env.NODE_ENV !== 'prod') {
+    console.log('sandbox mode')
     exchange.setSandboxMode(true)
   }
 }
@@ -51,10 +52,10 @@ async function openLongPosition(orderInfo) {
       stopLossPercentage,
     } = orderInfo
 
-    await exchange.fapiPrivatePostLeverage({
-      symbol: symbol,
-      leverage: leverage,
-    })
+    // await exchange.fapiPrivatePostLeverage({
+    //   symbol: symbol,
+    //   leverage: leverage,
+    // })
 
     let currentPrice = await getCurrentPrice(symbol)
     const maxQuantityUSDT = usdtAmount * leverage
@@ -148,10 +149,10 @@ async function openShortPosition(orderInfo) {
       stopLossPercentage,
     } = orderInfo
 
-    await exchange.fapiPrivatePostLeverage({
-      symbol: symbol,
-      leverage: leverage,
-    })
+    // await exchange.fapiPrivatePostLeverage({
+    //   symbol: symbol,
+    //   leverage: leverage,
+    // })
 
     // Fetch current market price
     let currentPrice = await getCurrentPrice(symbol)
